@@ -19,7 +19,7 @@ public class TradeRatiosCollector {
 
     private static final Logger log = LoggerFactory.getLogger(TradeRatiosCollector.class);
 
-    private static final int FIFTEEN_MINUTES = 60000;
+    private static final int FIFTEEN_MINUTES = 900000;
 
     private EntityManager entityManager;
 
@@ -37,10 +37,14 @@ public class TradeRatiosCollector {
 
                 Double buyValue = findSellItemValue(html);
                 Double sellValue = findBuyItemValue(html);
+                if (buyValue == 0D || sellValue == 0D) {
+                    continue;
+                }
                 Double tradeRatio = buyValue / sellValue;
 
                 TradeInfo tradeInfo = new TradeInfo(buyItem, sellItem, tradeRatio);
                 entityManager.persist(tradeInfo);
+                entityManager.flush();
                 Thread.sleep(1000);
             }
         }
@@ -64,6 +68,9 @@ public class TradeRatiosCollector {
     private Double findSellItemValue(String html) {
         int buyIndexStart = html.indexOf("data-buyvalue=\"") + "data-buyvalue=\"".length();
         int buyIndexEnd = html.indexOf("\" data-ign=");
+        if (buyIndexStart == -1 || buyIndexEnd == -1) {
+            return 0D;
+        }
         String buyValue = html.substring(buyIndexStart, buyIndexEnd);
 
         return Double.parseDouble(buyValue);
@@ -72,6 +79,9 @@ public class TradeRatiosCollector {
     private Double findBuyItemValue(String html) {
         int sellIndexStart = html.indexOf("data-sellvalue=\"") + "data-sellvalue=\"".length();
         int sellIndexEnd = html.indexOf("\" data-buycurrency=\"");
+        if (sellIndexStart == -1 || sellIndexEnd == -1) {
+            return 0D;
+        }
         String sellValue = html.substring(sellIndexStart, sellIndexEnd);
 
         return Double.parseDouble(sellValue);
