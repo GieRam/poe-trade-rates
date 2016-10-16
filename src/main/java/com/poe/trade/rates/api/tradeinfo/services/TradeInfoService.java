@@ -27,4 +27,12 @@ public class TradeInfoService {
         return transform(repository.getTradeInfosLastWeek(context));
     }
 
+    public List<TradeInfoDto> getTradeInfosForDay(TradeInfoContext context) {
+        return transform(repository.getTradeInfoForDay(context));
+    }
+
+    public List<TradeInfoDto> getTradeInfosForMonth(TradeInfoContext context) {
+        return transform(repository.getTradeInfoForMonth(context));
+    }
+
 }

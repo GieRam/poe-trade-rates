@@ -20,6 +20,12 @@ public class TradeInfoContext {
         this.sellItem = SellItem.getByIndex(sellItem);
     }
 
+    public TradeInfoContext(Integer buyItem, Integer sellItem, Date startDate) {
+        this.buyItem = BuyItem.getByIndex(buyItem);
+        this.sellItem = SellItem.getByIndex(sellItem);
+        this.startDate = startDate;
+    }
+
     public TradeInfoContext(Integer buyItem,
                             Integer sellItem,
                             Date startDate,
