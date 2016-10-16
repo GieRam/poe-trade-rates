@@ -3,6 +3,7 @@ package com.poe.trade.rates.domain.repository;
 import com.poe.trade.rates.api.tradeinfo.services.TradeInfoContext;
 import com.poe.trade.rates.domain.entity.TradeInfo;
 
+import java.util.Date;
 import java.util.List;
 
 public interface TradeInfoRepository {
@@ -14,5 +15,7 @@ public interface TradeInfoRepository {
     List<TradeInfo> getTradeInfosLastWeek(TradeInfoContext context);
 
     List<TradeInfo> getTradeInfoForMonth(TradeInfoContext context);
+
+    List<TradeInfo> getTradeInfoForDateRange(Date startDate, Date endDate);
 
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.util.Date;
 import java.util.List;
 
 import static org.hibernate.criterion.Restrictions.between;
@@ -46,6 +47,13 @@ public class TradeInfoRepositoryImpl implements TradeInfoRepository {
     @Override
     public List<TradeInfo> getTradeInfoForMonth(TradeInfoContext context) {
         return null;
+    }
+
+    @Override
+    public List<TradeInfo> getTradeInfoForDateRange(Date startDate, Date endDate) {
+        return getCriteria()
+                .add(between("createdAt", startDate, endDate))
+                .list();
     }
 
     private Criteria getCriteria() {
