@@ -4,8 +4,174 @@
     <meta charset="UTF-8">
     <title>Path of Exile trade rates graphed</title>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../assets/app.js"></script>	
+    <link rel="stylesheet" type="text/css" href="../assets/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 </head>
 <body>
+  <div class="container">
+    <div class="row"> 
+      <div class="col-xs-12">
+      	<h1>Path of Exile trade rates graphed</h1>
+      </div> 
+    </div>
+    <div class="row">
+      <div class="col-xs-12">  
+    	<h3>What do you want?</h3>
+      </div> 
+    </div>
+    <div class="row">
+    	<div class="col-xs-6" data-id="4">
+    	  <img src="../assets/images/items/Chaos_Orb.png" alt="Chaos Orb">
+    	</div>
+    	<div class="col-xs-6" data-id="6">
+    	  <img src="../assets/images/items/Exalted_Orb.png" alt="Exalted Orb">
+    	</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12"> 
+    	<h3>What do you have?</h3>
+      </div>
+    <div class="row">
+      <div class="col-xs-12">
+      	<div data-id="1" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Orb_of_Alteration.png" alt="Orb of Alteration">
+      	</div>
+      	<div data-id="2" class="currency-selectable">
+      		<img class="currency"  src="../assets/images/items/Orb_of_Fusing.png" alt="Orb of Fusing">
+      	</div>
+      	<div data-id="3" class="currency-selectable">
+      		<img class="currency"  src="../assets/images/items/Orb_of_Alchemy.png" alt="Orb of Alchemy">
+      	</div>
+      	<div data-id="4" class="currency-selectable">
+      		<img class="currency"  src="../assets/images/items/Chaos_Orb.png" alt="Chaos Orb">
+      	</div>
+      	<div data-id="5" class="currency-selectable">
+      		<img class="currency"  src="../assets/images/items/Gemcutter's_Prism.png" alt="Gemvutter's Prism">
+      	</div>
+      	<div data-id="6" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Exalted_Orb.png" alt="Exalted Orb">
+      	</div>
+      	<div data-id="7" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Chromatic_Orb.png" alt="Chromatic Orb">
+      	</div>
+      	<div data-id="8" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Jeweller's_Orb.png" alt="Jeweller's Orb">
+      	</div>
+      	<div data-id="9" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Orb_of_Chance.png" alt="Orb of Chance">
+      	</div>
+      	<div data-id="10" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Cartographer's_Chisel.png" alt="Cartographer's Chisel">
+      	</div>
+      	<div data-id="11" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Orb_of_Scouring.png" alt="Orb of Scouring">
+      	</div>
+      	<div data-id="12" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Blessed_Orb.png" alt="Blessed Orb">
+      	</div>
+      	<div data-id="13" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Orb_of_Regret.png" alt="Orb of Regret">
+      	</div>
+      	<div data-id="14" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Regal_Orb.png" alt="Regal Orb">
+      	</div>
+      	<div data-id="15" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Divine_Orb.png" alt="Divine Orb">
+      	</div>
+      	<div data-id="16" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Vaal_Orb.png" alt="Vaal Orb">
+      	</div>
+      	<div data-id="17" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Scroll_of_Wisdom.png" alt="Scroll of Wisdom">
+      	</div>
+      	<div data-id="18" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Portal_Scroll.png" alt="Portal Scroll">
+      	</div>
+      	<div data-id="19" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Armourer's_Scrap.png" alt="Armourer's Scrap">
+      	</div>
+      	<div data-id="20" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Blacksmith's_Whetstone.png" alt="Blacksmith's Whetstone">
+      	</div>
+      	<div data-id="21" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Glassblower's_Bauble.png" alt="Glassblower's Bauble">
+      	</div>
+      	<div data-id="22" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Orb_of_Transmutation.png" alt="Orb of Transmutation">
+      	</div>
+      	<div data-id="23" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Orb_of_Augmentation.png" alt="Orb of Augmentation">
+      	</div>
+      	<div data-id="24" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Mirror_of_Kalandra.png" alt="Mirror of Kalandra">
+      	</div>
+      	<div data-id="25" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Eternal_Orb.png" alt="Eternal Orb">
+      	</div>
+      	<div data-id="26" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Perandus_Coin.png" alt="Perandus Coin">
+      	</div>
+      	<div data-id="27" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Silver_Coin.png" alt="Silver Coin">
+      	</div>
+      	<div data-id="28" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Sacrifice_at_Dusk.png" alt="Sacrifice at Dusk">
+      	</div>
+      	<div data-id="29" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Sacrifice_at_Midnight.png" alt="Sacrifice at Midnight">
+      	</div>
+      	<div data-id="30" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Sacrifice_at_Dawn.png" alt="Sacrifice at Dawn">
+      	</div>
+      	<div data-id="31" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Sacrifice_at_Noon.png" alt="Sacrifice at Noon">
+      	</div>
+      	<div data-id="32" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Mortal_Grief.png" alt="Mortal Grief">
+      	</div>
+      	<div data-id="33" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Mortal_Rage.png" alt="Mortal Rage">
+      	</div>
+      	<div data-id="34" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Mortal_Hope.png" alt="Mortal Hope">
+      	</div>
+      	<div data-id="35" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Mortal_Ignorance.png" alt="Mortal Ignorance">
+      	</div>
+      	<div data-id="36" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Ebers_Key.png" alt="Ebers Key">
+      	</div>
+      	<div data-id="37" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Yriels_Key.png" alt="Yriels Key">
+      	</div>
+      	<div data-id="38" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Inyas_Key.png" alt="Inyas Key">
+      	</div>
+      	<div data-id="39" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Volkuurs_Key.png" alt="Volkuurs Key">
+      	</div>
+      	<div data-id="40" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Offering_to_the_Goddess.png" alt="Offering to the Goddess">
+      	</div>
+      	<div data-id="41" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Fragment_of_the_Hydra.png" alt="Fragment of the Hydra">
+      	</div>
+      	<div data-id="42" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Fragment_of_the_Phoenix.png" alt="Fragment of the Phoenix">
+      	</div>
+      	<div data-id="43" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Fragment_of_the_Minotaur.png" alt="Fragment of the Minotaur">
+      	</div>
+      	<div data-id="44" class="currency-selectable">
+      		<img class="currency" src="../assets/images/items/Fragment_of_the_Chimera.png" alt="Fragment of the Chimera">
+      	</div>
+
+
+
+      </div>
+    </div>
+    </div>
+  </div>
 </body>
 </html>
