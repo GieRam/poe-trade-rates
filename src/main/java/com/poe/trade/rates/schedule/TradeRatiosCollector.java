@@ -38,6 +38,7 @@ public class TradeRatiosCollector {
                 Double buyValue = findSellItemValue(html);
                 Double sellValue = findBuyItemValue(html);
                 if (buyValue == 0D || sellValue == 0D) {
+                    Thread.sleep(10000);
                     continue;
                 }
                 Double tradeRatio = buyValue / sellValue;
@@ -45,7 +46,7 @@ public class TradeRatiosCollector {
                 TradeInfo tradeInfo = new TradeInfo(buyItem, sellItem, tradeRatio);
                 entityManager.persist(tradeInfo);
                 entityManager.flush();
-                Thread.sleep(9500);
+                Thread.sleep(10000);
             }
         }
     }
@@ -66,25 +67,22 @@ public class TradeRatiosCollector {
     }
 
     private Double findSellItemValue(String html) {
-        int buyIndexStart = html.indexOf("data-buyvalue=\"") + "data-buyvalue=\"".length();
-        int buyIndexEnd = html.indexOf("\" data-ign=");
-        if (buyIndexStart == -1 || buyIndexEnd == -1) {
-            return 0D;
-        }
-        String buyValue = html.substring(buyIndexStart, buyIndexEnd);
-
-        return Double.parseDouble(buyValue);
+        return findItemValue(html, "data-buyvalue=\"", "\" data-ign=");
     }
 
     private Double findBuyItemValue(String html) {
-        int sellIndexStart = html.indexOf("data-sellvalue=\"") + "data-sellvalue=\"".length();
-        int sellIndexEnd = html.indexOf("\" data-buycurrency=\"");
-        if (sellIndexStart == -1 || sellIndexEnd == -1) {
+        return findItemValue(html, "data-sellvalue=\"", "\" data-buycurrency=\"");
+    }
+
+    private Double findItemValue(String html, String startText, String endText) {
+        int startIndex = html.indexOf(startText) + startText.length();
+        int endIndex = html.indexOf(endText);
+        if (startIndex == -1 || endIndex == -1) {
             return 0D;
         }
-        String sellValue = html.substring(sellIndexStart, sellIndexEnd);
+        String itemValue = html.substring(startIndex, endIndex);
 
-        return Double.parseDouble(sellValue);
+        return Double.parseDouble(itemValue);
     }
 
 }

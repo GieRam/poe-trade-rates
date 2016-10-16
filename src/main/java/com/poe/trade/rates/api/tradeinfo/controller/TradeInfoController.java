@@ -37,16 +37,31 @@ public class TradeInfoController {
         Date dateEnd = DATE_FORMAT.parse(endDate);
 
         TradeInfoContext context = new TradeInfoContext(buyItem, sellItem, dateStart, dateEnd);
-
         return tradeInfoService.getTradeInfos(context);
+    }
+
+    @RequestMapping(value = "/day", method = RequestMethod.GET)
+    public List<TradeInfoDto> getTradeInfosForDay(@NotNull @RequestParam Integer buyItem,
+                                                  @NotNull @RequestParam Integer sellItem,
+                                                  @NotNull @RequestParam String startDate) throws ParseException {
+        Date dateStart = DATE_FORMAT.parse(startDate);
+
+        TradeInfoContext context = new TradeInfoContext(buyItem, sellItem, dateStart);
+        return tradeInfoService.getTradeInfosForDay(context);
     }
 
     @RequestMapping(value = "/week", method = RequestMethod.GET)
     public List<TradeInfoDto> getTradeInfosLastWeek(@NotNull @RequestParam Integer buyItem,
                                                     @NotNull @RequestParam Integer sellItem) {
         TradeInfoContext context = new TradeInfoContext(buyItem, sellItem);
-
         return tradeInfoService.getTradeInfosLastWeek(context);
+    }
+
+    @RequestMapping(value = "/month", method = RequestMethod.GET)
+    public List<TradeInfoDto> getTradeInfosLastMonth(@NotNull @RequestParam Integer buyItem,
+                                                     @NotNull @RequestParam Integer sellItem) {
+        TradeInfoContext context = new TradeInfoContext(buyItem, sellItem);
+        return tradeInfoService.getTradeInfosForMonth(context);
     }
 
 }
