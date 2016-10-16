@@ -13,4 +13,19 @@ public class TradeInfoDto {
         this.createdAt = createdAt;
     }
 
+    public Double getTradeRatio() {
+        return tradeRatio;
+    }
+
+    public void setTradeRatio(Double tradeRatio) {
+        this.tradeRatio = tradeRatio;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 }

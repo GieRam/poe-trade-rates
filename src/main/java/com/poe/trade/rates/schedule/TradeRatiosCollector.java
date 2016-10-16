@@ -45,7 +45,7 @@ public class TradeRatiosCollector {
                 TradeInfo tradeInfo = new TradeInfo(buyItem, sellItem, tradeRatio);
                 entityManager.persist(tradeInfo);
                 entityManager.flush();
-                Thread.sleep(1000);
+                Thread.sleep(9500);
             }
         }
     }
