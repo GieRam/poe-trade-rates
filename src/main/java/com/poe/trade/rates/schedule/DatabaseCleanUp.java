@@ -26,7 +26,7 @@ public class DatabaseCleanUp {
         this.entityManager = entityManager;
     }
 
-    @Scheduled(cron = "* * 1 * *")
+    @Scheduled(cron = "0 0 0 1 * ?")
     @Transactional
     public void cleanUpDataOlderThanMonth() {
         List<TradeInfo> tradeInfos = repository.getTradeInfoForDateRange(getOneYearAgo(), getOneMonthAgo());
