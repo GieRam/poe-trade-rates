@@ -35,8 +35,12 @@ public class TradeInfoRepositoryImpl implements TradeInfoRepository {
 
     @Override
     public List<TradeInfo> getTradeInfoForDay(TradeInfoContext context) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(context.getStartDate());
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+
         return getCriteraBuyAndSell(context)
-                .add(between("createdAt", context.getStartDate(), now()))
+                .add(between("createdAt", context.getStartDate(), calendar.getTime()))
                 .list();
     }
 
