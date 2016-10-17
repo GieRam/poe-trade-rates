@@ -3,6 +3,8 @@ package com.poe.trade.rates.schedule;
 import com.poe.trade.rates.domain.entity.BuyItem;
 import com.poe.trade.rates.domain.entity.SellItem;
 import com.poe.trade.rates.domain.entity.TradeInfo;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import java.io.IOException;
 
 @Component
@@ -21,15 +25,14 @@ public class TradeRatiosCollector {
 
     private static final int FIFTEEN_MINUTES = 900000;
 
-    private EntityManager entityManager;
+    private EntityManagerFactory entityManagerFactory;
 
     @Autowired
-    public TradeRatiosCollector(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public TradeRatiosCollector(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
     }
 
     @Scheduled(fixedDelay = FIFTEEN_MINUTES)
-    @Transactional
     public void getTradeRatios() throws InterruptedException {
         for (BuyItem buyItem : BuyItem.values()) {
             for (SellItem sellItem : SellItem.values()) {
@@ -43,12 +46,22 @@ public class TradeRatiosCollector {
                 }
                 Double tradeRatio = buyValue / sellValue;
 
-                TradeInfo tradeInfo = new TradeInfo(buyItem, sellItem, tradeRatio);
-                entityManager.persist(tradeInfo);
-                entityManager.flush();
+                saveTradeInfo(buyItem, sellItem, tradeRatio);
                 Thread.sleep(10000);
             }
         }
+    }
+
+    private void saveTradeInfo(BuyItem buyItem, SellItem sellItem, Double tradeRatio) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        EntityTransaction tx = entityManager.getTransaction();
+        tx.begin();
+        TradeInfo tradeInfo = new TradeInfo(buyItem, sellItem, tradeRatio);
+        entityManager.persist(tradeInfo);
+        entityManager.flush();
+        entityManager.clear();
+        tx.commit();
     }
 
     private String createUrl(int want, int have) {
