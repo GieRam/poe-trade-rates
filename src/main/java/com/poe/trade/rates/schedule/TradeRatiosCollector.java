@@ -37,7 +37,10 @@ public class TradeRatiosCollector {
         for (BuyItem buyItem : BuyItem.values()) {
             for (SellItem sellItem : SellItem.values()) {
                 String html = getHtml(createUrl(buyItem.getItemIndex(), sellItem.getItemIndex()));
-
+                if (html == null) {
+                    Thread.sleep(10000);
+                    continue;
+                }
                 Double buyValue = findSellItemValue(html);
                 Double sellValue = findBuyItemValue(html);
                 if (buyValue == 0D || sellValue == 0D) {
