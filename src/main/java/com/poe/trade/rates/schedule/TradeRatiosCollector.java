@@ -62,6 +62,7 @@ public class TradeRatiosCollector {
         entityManager.flush();
         entityManager.clear();
         tx.commit();
+        entityManager.close();
     }
 
     private String createUrl(int want, int have) {
