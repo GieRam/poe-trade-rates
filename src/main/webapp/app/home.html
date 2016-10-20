@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <title>Path of Exile trade rates graphed</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script> 
+  <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
   <script type="text/javascript" src="../assets/app.js"></script>	
   <link rel="stylesheet" type="text/css" href="../assets/main.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 </head>
 <body>
@@ -22,12 +23,12 @@
       </div> 
     </div>
     <div class="row">
-      <div class="col-xs-12 col-md-12 buy-items" >
-          <div class="sell-item" data-id="4">
-            <img class="sell-item-icon" src="../assets/images/items/Chaos_Orb.png" alt="Chaos Orb" title="Chaos Orb">
+      <div class="col-xs-12 col-md-12" >
+          <div class="buy-item buy-item-active" data-id="4">
+            <img class="item-icon" src="../assets/images/items/Chaos_Orb.png" alt="Chaos Orb" title="Chaos Orb">
           </div>
-          <div class="sell-item" data-id="6">
-    	      <img class="sell-item-icon" src="../assets/images/items/Exalted_Orb.png" alt="Exalted Orb" title="Exalted Orb">
+          <div class="buy-item" data-id="6">
+    	      <img class="item-icon" src="../assets/images/items/Exalted_Orb.png" alt="Exalted Orb" title="Exalted Orb">
           </div>
       </div>
     </div>
@@ -64,11 +65,11 @@
         <label>To: <input type="date" name="dayTo" id="dayTo"></label>
       </div>
     </div>
-    <div class="row submit">
+    <div class="row">
       <button class="btn btn-default" id="button">GET GRAPH</button>
     </div>
-    <div class="row">
-      <canvas id="myChart" width="400" height="400"></canvas>
+    <div class="row chart">
+      <div class="ct-chart ct-golden-section" id="chart1"></div>
     </div>   
   </div>
 </body>

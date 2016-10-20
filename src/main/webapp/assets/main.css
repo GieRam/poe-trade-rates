@@ -5,7 +5,7 @@ body {
 	font-family: arial;
 }
 
-.sell-item-icon {
+.item-icon {
 	width: 32px;
     height: 32px;
     margin-top:3px;
@@ -26,16 +26,40 @@ body {
     border-color: #4d4d33;
 }
 .sell-item:hover {
-	opacity: 0.8;
+	background-color: #E7D4B4;
+	border-color: #A2937A;
+}
+.sell-item-active {
+	background-color: #E7D4B4;
+	border-color: #A2937A;
+}
+.buy-item {
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+    float: left;
+    text-align: center;
+    background-color: #9f937e;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #4d4d33;
+}
+.buy-item:hover {
+	background-color: #E7D4B4;
+	border-color: #A2937A;
+}
+
+.buy-item-active {
+	background-color: #E7D4B4;
+	border-color: #A2937A;
 }
 
 .container {
 	max-width: 67%;
 }
 #button {
-    width: 40%;
-    margin-right: 12%;
-    float:right;
+    width: 200px;
+    margin-left: 12px;
 	-moz-box-shadow:inset 0px 1px 13px -13px #557539;
 	-webkit-box-shadow:inset 0px 1px 13px -13px #557539;
 	box-shadow:inset 0px 1px 13px -13px #557539;
@@ -66,28 +90,43 @@ body {
 	text-decoration:none;
 	text-align:center;
 	text-shadow:0px 0px 0px #507514;
+	margin-top: 40px;
+	margin-bottom: 30px;
 }
 #button:hover{
 	opacity: 0.8;
 }
-.submit {
-	margin-top: 50px;
-}
 .titleMain {
-  margin-bottom:20px;
-  margin-top:10%;
+    margin-bottom:20px;
+    margin-top:10%;
 }
 .title {
- margin-top:30px;
- font-size: 18px;
+    margin-top:30px;
+    font-size: 18px;
 }
 #select {
-   color:#4d4d33;
-   border-width: 2px;
-   border-color: #4d4d33;
-   height:100%;
-   font-size:18px;
+    color:#4d4d33;
+    border-width: 2px;
+    border-color: #4d4d33;
+    height:100%;
+    font-size:18px;
 }
 .form {
-	margin-top:5px;
+    margin-top:5px;
+}
+#myChart {
+	max-width:50%;
+	max-height:400px;
+}
+.chart {
+	margin-bottom: 6%;
+}
+.ct-series-a .ct-line {
+  stroke: #9f937e !important;
+  stroke-width: 2px;
+}
+
+.ct-series-a .ct-line,
+.ct-series-a .ct-point {
+  stroke: #9f937e !important;
 }

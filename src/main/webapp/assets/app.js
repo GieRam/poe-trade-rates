@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function() { 
 // Adding sell-items icons to the website
   var items = ["Orb of Alteration", "Orb of Fusing", "Orb of Alchemy", "Chaos Orb", "Gemcutter's Prism", "Exalted Orb", "Chromatic Orb", "Jeweller's Orb", "Orb of Chance", "Cartographer's Chisel", "Orb of Scouring", "Blessed Orb", "Orb of Regret", "Regal Orb", "Divine Orb", "Vaal Orb", "Scroll of Wisdom", "Portal Scroll", "Armourer's Scrap", "Blacksmith's Whetstone", "Glassblower's Bauble",
 "Orb of Transmutation", "Orb of Augmentation", "Mirror of Kalandra", "Eternal Orb", "Perandus Coin", "Silver Coin", "Sacrifice at Dusk", "Sacrifice at Midnight", "Sacrifice at Dawn", "Sacrifice at Noon", "Mortal Grief", "Mortal Rage", "Mortal Hope", "Mortal Ignorance", "Ebers Key", "Yriels Key", "Inyas Key", "Volkuurs Key", "Offering to the Goddess","Fragment of the Hydra", "Fragment of the Phoenix", "Fragment of the Minotaur", "Fragment of the Chimera"];
@@ -6,24 +6,36 @@ $(document).ready(function() {
     var itemName = items[i];
     var itemNameSrc = itemName.replace(/ /g,"_");
     var itemId = i + 1;
-    var item = "<div data-id=\""+ itemId + "\" class=\"sell-item\"><img class=\"sell-item-icon\" src=\"../assets/images/items/" + itemNameSrc + ".png\" alt=\"" + itemName + "\" title=\"" + itemName + "\"></div>";
+    var item = "<div data-id=\""+ itemId + "\" class=\"sell-item \"><img class=\"item-icon\" src=\"../assets/images/items/" + itemNameSrc + ".png\" alt=\"" + itemName + "\" title=\"" + itemName + "\"></div>";
     $(item).appendTo(".sell-items");
-  }	 
-// Making the request for data
-  var buyItem = 4;
-  var sellItem = 6; 
+  }	
+
+// setting up values for the request
+  var buyItem = $(".buy-item");
+  var sellItem = $(".sell-item");
+  var buyItemNum = 4;
+  var sellItemNum = 6; 
+  var requestType = "get"; 
   var startDate;
   var endDate;
-  var select = "get"; 
-  $(".buy-item").click(function() {
-    buyItem = $(this).data("id");
+  
+  $(".sell-items .sell-item:nth-child(1)").addClass('sell-item-active');
+  
+  buyItem.click(function(){
+    buyItem.removeClass('buy-item-active');
+    $(this).addClass('buy-item-active');
+    buyItemNum = $(this).data("id");
+  }); 
+  
+  sellItem.click(function(){
+    sellItem.removeClass('sell-item-active');
+    $(this).addClass('sell-item-active');
+    sellItemNum = $(this).data("id");
   });
-  $(".sell-item").click(function() {
-    sellItem = $(this).data("id");
-  });
+
   $("select").change(function() {
-    select = $('select option:selected').val();
-    switch (select) {
+    requestType = $('select option:selected').val();
+    switch (requestType) {
     	case "get":
     	  $("#from").show();
     	  $("#to").show();
@@ -45,41 +57,59 @@ $(document).ready(function() {
   $("#dayTo").change(function() {
     endDate = $("#dayTo").val();
   })
-  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-  var dates = [];  
-  var xLabels = [];
-  var yLabels = [];
-  var ctx = $("#myChart");
+// Creating chart
+  var data = {
+      labels: [],
+      series: [
+        []
+      ]
+    };
+
+  
+
+// Making the request for the data
   $("#button").click(function() {
-  	var dataUrl = "http://localhost:8080/trade-info/" + select + "?buyItem=" + buyItem + "&sellItem=" + sellItem;
-  	if(select == "get" || select == "day") {
+  	var dateLabels = [];  
+    var xLabels = [];
+    var yLabels = [];
+  	var dataUrl = "http://localhost:8080/trade-info/" + requestType + "?buyItem=" + buyItemNum + "&sellItem=" + sellItemNum;  	
+  	if(requestType == "get" || requestType == "day") {
   	  dataUrl += "&startDate=" + startDate;	
   	}
-  	if(select == "get") {
+  	if(requestType == "get") {
       dataUrl += "&endDate=" + endDate;
   	}
+
     $.ajax({
       url: dataUrl, 
-      dataType: 'jsonp',
-      crossDomain : true,
-      success: function(result){
+      dataType: 'json',
+      success: function(result) {
     	console.log(result);
         for(i = 0; i < result.length; i++) {
       	  xLabels.push(result[i]["tradeRatio"]);
       	  yLabels.push(result[i]["createdAt"]);
         } 
         yLabels.map(function(val) {
-          var date = new Date(val);
-          var month = months[date.getMonth()];
-          var day = date.getDate();
-          var hour = date.getHours();
-          var minutes = date.getMinutes();
-          dates.push(month + "." + pad(day) + ", " + pad(hour) + ":" + pad(minutes));
+          dateLabels.push(milisecsToDate(val));
         })
+        data.labels = dateLabels;
+        data.series[0] = xLabels;
+        var chart = new Chartist.Line('#chart1', data);
       }
     });
   });
+
+  function milisecsToDate(val) {
+  	var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+    var date = new Date(val);
+    var month = months[date.getMonth()];
+    var day = date.getDate();
+    var hour = date.getHours();
+    var minutes = date.getMinutes();
+    return month + "." + pad(day) + ", " + pad(hour) + ":" + pad(minutes); 
+  }
+
   function pad(val) {
-  return ("00" + val).slice(-2);
+    return ("00" + val).slice(-2);
   }
 });
