@@ -1,7 +1,7 @@
 $(document).ready(function() { 
 // Adding sell-items icons to the website
   var items = ["Orb of Alteration", "Orb of Fusing", "Orb of Alchemy", "Chaos Orb", "Gemcutter's Prism", "Exalted Orb", "Chromatic Orb", "Jeweller's Orb", "Orb of Chance", "Cartographer's Chisel", "Orb of Scouring", "Blessed Orb", "Orb of Regret", "Regal Orb", "Divine Orb", "Vaal Orb", "Scroll of Wisdom", "Portal Scroll", "Armourer's Scrap", "Blacksmith's Whetstone", "Glassblower's Bauble",
-"Orb of Transmutation", "Orb of Augmentation", "Mirror of Kalandra", "Eternal Orb", "Perandus Coin", "Silver Coin", "Sacrifice at Dusk", "Sacrifice at Midnight", "Sacrifice at Dawn", "Sacrifice at Noon", "Mortal Grief", "Mortal Rage", "Mortal Hope", "Mortal Ignorance", "Ebers Key", "Yriels Key", "Inyas Key", "Volkuurs Key", "Offering to the Goddess","Fragment of the Hydra", "Fragment of the Phoenix", "Fragment of the Minotaur", "Fragment of the Chimera"];
+"Orb of Transmutation", "Orb of Augmentation", "Mirror of Kalandra", "Eternal Orb", "Perandus Coin", "Silver Coin", "Sacrifice at Dusk", "Sacrifice at Midnight", "Sacrifice at Dawn", "Sacrifice at Noon", "Mortal Grief", "Mortal Rage", "Mortal Hope", "Mortal Ignorance", "Ebers Key", "Yriels Key", "Inyas Key", "Volkuurs Key", "Offering to the Goddess","Fragment of the Hydra", "Fragment of the Phoenix", "Fragment of the Minotaur", "Fragment of the Chimera", "Apprentice Cartographer's Sextant" , "Journeyman Cartographer's Sextant", "Master Cartographer's Sextant" , "Sacrifice Set", "Mortal Set", "Pale Court Set", "Fragment Set"];
   for (i = 0; i < items.length; i++) {
     var itemName = items[i];
     var itemNameSrc = itemName.replace(/ /g,"_");
@@ -64,20 +64,43 @@ $(document).ready(function() {
         []
       ]
     };
-
-  
+  var options = {
+      axisX: {
+        labelInterpolationFnc: function skipLabels(value, index) {
+          switch(requestType) {
+          	case "get":
+            case "week":
+            case "month":
+              return index % 20  === 0 ? value : null;
+              break;
+            case "day":
+              return index % 4  === 0 ? value : null;
+              break;
+          }
+        }
+      },
+      axisY: {
+        labelInterpolationFnc: function skipLabels(value, index) {
+          if (value < 0.1) {
+          	return Math.round(value * 10000) / 10000;
+          } else {
+          	return Math.round(value * 100) / 100;
+          }
+        }
+      }
+    };
 
 // Making the request for the data
   $("#button").click(function() {
   	var dateLabels = [];  
-    var xLabels = [];
-    var yLabels = [];
+    var tradeRatio = [];
+    var createdAt = [];
   	var dataUrl = "http://localhost:8080/trade-info/" + requestType + "?buyItem=" + buyItemNum + "&sellItem=" + sellItemNum;  	
-  	if(requestType == "get" || requestType == "day") {
+  	if(requestType == "day") {
   	  dataUrl += "&startDate=" + startDate;	
   	}
   	if(requestType == "get") {
-      dataUrl += "&endDate=" + endDate;
+      dataUrl += "&startDate=" + startDate + "&endDate=" + endDate;
   	}
 
     $.ajax({
@@ -86,15 +109,15 @@ $(document).ready(function() {
       success: function(result) {
     	console.log(result);
         for(i = 0; i < result.length; i++) {
-      	  xLabels.push(result[i]["tradeRatio"]);
-      	  yLabels.push(result[i]["createdAt"]);
+      	  tradeRatio.push(result[i]["tradeRatio"]);
+      	  createdAt.push(result[i]["createdAt"]);
         } 
-        yLabels.map(function(val) {
+        createdAt.map(function(val) {
           dateLabels.push(milisecsToDate(val));
         })
         data.labels = dateLabels;
-        data.series[0] = xLabels;
-        var chart = new Chartist.Line('#chart1', data);
+        data.series[0] = tradeRatio;
+        var chart = new Chartist.Line('#chart1', data, options);
       }
     });
   });
@@ -104,9 +127,14 @@ $(document).ready(function() {
     var date = new Date(val);
     var month = months[date.getMonth()];
     var day = date.getDate();
-    var hour = date.getHours();
-    var minutes = date.getMinutes();
-    return month + "." + pad(day) + ", " + pad(hour) + ":" + pad(minutes); 
+    var datapoint = month + "." + pad(day);
+    if (requestType == "day") {
+      var hour = date.getHours();
+      var minutes = date.getMinutes();
+      return datapoint += ", " + pad(hour) + ":" + pad(minutes); 
+    } else {
+      return datapoint;
+    } 
   }
 
   function pad(val) {

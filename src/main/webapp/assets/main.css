@@ -130,3 +130,7 @@ body {
 .ct-series-a .ct-point {
   stroke: #9f937e !important;
 }
+.ct-label {
+    color: white !important;
+    font-size: 13px !important;
+}
