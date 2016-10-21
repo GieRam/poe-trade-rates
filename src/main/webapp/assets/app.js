@@ -87,7 +87,10 @@ $(document).ready(function() {
           	return Math.round(value * 100) / 100;
           }
         }
-      }
+      },
+      plugins: [
+        Chartist.plugins.tooltip()
+      ]
     };
 
 // Making the request for the data
