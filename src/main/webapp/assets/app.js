@@ -58,40 +58,38 @@ $(document).ready(function() {
     endDate = $("#dayTo").val();
   })
 // Creating chart
-  var data = {
-      labels: [],
-      series: [
-        []
-      ]
-    };
+  var graph = {
+    labels: [],
+    series: [
+      []
+    ]
+  };
+
   var options = {
-      axisX: {
-        labelInterpolationFnc: function skipLabels(value, index) {
-          switch(requestType) {
-          	case "get":
-            case "week":
-            case "month":
-              return index % 20  === 0 ? value : null;
-              break;
-            case "day":
-              return index % 4  === 0 ? value : null;
-              break;
-          }
+    axisX: {
+      labelInterpolationFnc: function skipLabels(value, index) {
+        switch(requestType) {
+          case "get":
+          case "week":
+          case "month":
+            return index % 20  === 0 ? value : null;
+            break;
+          case "day":
+            return index % 4  === 0 ? value : null;
+            break;
         }
-      },
-      axisY: {
-        labelInterpolationFnc: function skipLabels(value, index) {
-          if (value < 0.1) {
-          	return Math.round(value * 10000) / 10000;
-          } else {
-          	return Math.round(value * 100) / 100;
-          }
+      }
+    },
+    axisY: {
+      labelInterpolationFnc: function skipLabels(value, index) {
+        if (value < 0.1) {
+          return Math.round(value * 10000) / 10000;
+        } else {
+          return Math.round(value * 100) / 100;
         }
-      },
-      plugins: [
-        Chartist.plugins.tooltip()
-      ]
-    };
+      }
+    }
+  };
 
 // Making the request for the data
   $("#button").click(function() {
@@ -110,7 +108,7 @@ $(document).ready(function() {
       url: dataUrl, 
       dataType: 'json',
       success: function(result) {
-    	console.log(result);
+    	  console.log(result);
         for(i = 0; i < result.length; i++) {
       	  tradeRatio.push(result[i]["tradeRatio"]);
       	  createdAt.push(result[i]["createdAt"]);
@@ -118,9 +116,9 @@ $(document).ready(function() {
         createdAt.map(function(val) {
           dateLabels.push(milisecsToDate(val));
         })
-        data.labels = dateLabels;
-        data.series[0] = tradeRatio;
-        var chart = new Chartist.Line('#chart1', data, options);
+        graph.labels = dateLabels;
+        graph.series[0] = tradeRatio;
+        var chart = new Chartist.Line('#chart1', graph, options);
       }
     });
   });

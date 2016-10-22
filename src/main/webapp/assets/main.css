@@ -122,15 +122,15 @@ body {
 	margin-bottom: 6%;
 }
 .ct-series-a .ct-line {
-  stroke: #9f937e !important;
-  stroke-width: 2px;
+    stroke: #9f937e !important;
+    stroke-width: 2px;
 }
 
 .ct-series-a .ct-line,
 .ct-series-a .ct-point {
-  stroke: #9f937e !important;
+    stroke: #9f937e !important;
 }
 .ct-label {
     color: white !important;
-    font-size: 13px !important;
+    size:16px !important;
 }
