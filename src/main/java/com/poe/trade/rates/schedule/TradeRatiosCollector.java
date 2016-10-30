@@ -3,15 +3,12 @@ package com.poe.trade.rates.schedule;
 import com.poe.trade.rates.domain.entity.BuyItem;
 import com.poe.trade.rates.domain.entity.SellItem;
 import com.poe.trade.rates.domain.entity.TradeInfo;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,7 +20,7 @@ public class TradeRatiosCollector {
 
     private static final Logger log = LoggerFactory.getLogger(TradeRatiosCollector.class);
 
-    private static final int FIFTEEN_MINUTES = 900000;
+    private static final int DATA_COLLECT_DELAY = 970000;
 
     private EntityManagerFactory entityManagerFactory;
 
@@ -32,7 +29,7 @@ public class TradeRatiosCollector {
         this.entityManagerFactory = entityManagerFactory;
     }
 
-    @Scheduled(fixedDelay = FIFTEEN_MINUTES)
+    @Scheduled(fixedDelay = DATA_COLLECT_DELAY)
     public void getTradeRatios() throws InterruptedException {
         for (BuyItem buyItem : BuyItem.values()) {
             for (SellItem sellItem : SellItem.values()) {
