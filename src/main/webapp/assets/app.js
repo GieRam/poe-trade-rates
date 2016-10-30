@@ -96,7 +96,7 @@ $(document).ready(function() {
   	var dateLabels = [];  
     var tradeRatio = [];
     var createdAt = [];
-  	var dataUrl = "http://localhost:8080/trade-info/" + requestType + "?buyItem=" + buyItemNum + "&sellItem=" + sellItemNum;  	
+  	var dataUrl = window.location.hostname + "/trade-info/" + requestType + "?buyItem=" + buyItemNum + "&sellItem=" + sellItemNum;
   	if(requestType == "day") {
   	  dataUrl += "&startDate=" + startDate;	
   	}
