@@ -66,7 +66,7 @@ public class TradeRatiosCollector {
     }
 
     private String createUrl(int want, int have) {
-        String baseUrl = "http://currency.poe.trade/search?league=Essence&online=x&want=%s&have=%s";
+        String baseUrl = "http://currency.poe.trade/search?league=Standard&online=x&want=%s&have=%s";
         return String.format(baseUrl, want, have);
     }
 
