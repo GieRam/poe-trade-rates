@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Path of Exile trade rates graphed</title>
-  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <title >Path of Exile trade rates graphed</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
-  <script type="text/javascript" src="../assets/app.js"></script>	
+  <script data-main="../assets/app" src="../assets/require.js"></script>
+  <script type="text/javascript" src="../assets/app.js"></script>
   <link rel="stylesheet" type="text/css" href="../assets/main.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 </head>
@@ -13,40 +14,36 @@
   <div class="container">
     <div class="row"> 
       <div class="col-xs-12 col-md-12">
-      	<h1 class="titleMain">Path of Exile trade rates graphed</h1>
+      	<h1 class="title-main">Path of Exile trade rates graphed</h1>
       </div> 
     </div>
     <div class="row">
       <div class="col-xs-12 col-md-12">  
-    	<h3 class="title">What do you want?</h3>
+    	<h4>What do you want?</h4>
       </div> 
     </div>
-    <div class="row">
+    <div class="row buy-items">
       <div class="col-xs-12 col-md-12" >
-          <div class="buy-item itemtest buy-item-active" id="4">
+          <div class="buy-item buy-item-active" id="4">
             <img class="item-icon" src="../assets/images/items/Chaos_Orb.png" alt="Chaos Orb" title="Chaos Orb">
           </div>
-          <div class="buy-item itemtest" id="6">
+          <div class="buy-item" id="6">
     	      <img class="item-icon" src="../assets/images/items/Exalted_Orb.png" alt="Exalted Orb" title="Exalted Orb">
           </div>
       </div>
-    </div>
+    </div><br>
     <div class="row">
       <div class="col-xs-12 col-md-12" > 
-    	  <h3 class="title">What do you have?</h3>
+    	  <h4>What do you have?</h4>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-12 sell-items col-md-12"></div>
     </div>
-    <div class="row">
-      <div class="col-xs-12 col-md-12">  
-        <h3 class="title">Select time to be graphed:</h3>
-      </div> 
-    </div>
-    <div class="row">
-      <div class="col-xs-2 col-md-2">
-        <select size="1" id="select" name="dateSelect">
+    <div class="row"> 
+      <div class="col-xs-7 col-md-7 form-group">
+        <label>Select the time period</label>
+        <select class ="form-control" size="1" id="select" name="select">
           <option value="get">Custom</option>
           <option value="day">Day</option>
           <option value="week">Last week</option>
@@ -54,18 +51,20 @@
         </select>
       </div>
     </div>
-    <div class="row form">
-      <div class="col-xs-2 col-md-2" id="from">
-        <label>From: <input type="date" name="dayFrom" id="dayFrom"></label>
+    <div class="row form-group" id="from">
+      <label class="col-xs-1 col-md-1 col-form-label">From</label>
+      <div class="col-xs-6 col-md-6" >
+        <input type="date" class="form-control" name="dayFrom" id="dayFrom">
       </div>
     </div>
-    <div class="row form">
-      <div class="col-xs-2 col-md-2" id="to">
-        <label>To: <input type="date" name="dayTo" id="dayTo"></label>
+    <div class="row form-group" id="to">
+      <label class="col-xs-1 col-md-1 col-form-label">To</label>
+      <div class="col-xs-6 col-md-6" >
+        <input type="date" class="form-control" name="dayTo" id="dayTo">
       </div>
     </div>
     <div class="row">
-      <button class="btn btn-default" id="button">GET GRAPH</button>
+      <button class="btn btn-default btn-lg" id="button">GET GRAPH</button>
     </div>
     <div class="row graph-container">
       <canvas id="chart"></canvas>
