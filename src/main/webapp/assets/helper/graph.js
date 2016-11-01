@@ -1,5 +1,4 @@
- require(["helper/graphForm" ], function(graphForm) {
- });
+require(["helper/graphForm" ], function(graphForm) {});
 
 var graph = (function() {
     var myChart = null;

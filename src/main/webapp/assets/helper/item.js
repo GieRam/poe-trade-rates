@@ -1,5 +1,3 @@
-require(["helper/renderItems" ], function(renderItems) {});
-
 var item = (function() {
     var buyItem = $(".buy-item");
     var sellItem = $(".sell-item");

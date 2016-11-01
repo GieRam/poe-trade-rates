@@ -7,7 +7,7 @@
       var sellItem = item.sellId();
       var dateFrom = graphForm.startDate();
       var dateEnd = graphForm.endDate();
-      var dataUrl = "http://localhost:8080/trade-info/" + requestType + "?buyItem=" + buyItem + "&sellItem=" + sellItem;    
+      var dataUrl = "http://" + window.location.host + "/trade-info/" + requestType + "?buyItem=" + buyItem + "&sellItem=" + sellItem;    
       if(requestType == "day") {
         dataUrl += "&startDate=" + dateFrom; 
       }

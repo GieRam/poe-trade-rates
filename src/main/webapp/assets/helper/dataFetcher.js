@@ -1,5 +1,4 @@
-require(["helper/urlBuilder", "helper/graphForm", "helper/graph"], function(urlBuilder, graphForm, graph) {
-});
+require(["helper/urlBuilder", "helper/graphForm", "helper/graph"], function(urlBuilder, graphForm, graph) {});
 
 var dataFetcher = (function() {
     function fetch() {
