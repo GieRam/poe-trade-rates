@@ -6,4 +6,17 @@ $(document).ready(function() {
     dataFetcher.fetchData(); 
   })
 
+  $(function () {
+                $('#datetimepicker').datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    maxDate: new Date
+                });
+            });
+
+    $(function () {
+                $('#datetimepicker1').datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    maxDate: new Date
+                });
+            });
 });

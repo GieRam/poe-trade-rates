@@ -5,10 +5,15 @@
   <title >Path of Exile trade rates graphed</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/src/js/bootstrap-datetimepicker.js"></script>
   <script data-main="../assets/app" src="../assets/require.js"></script>
   <script type="text/javascript" src="../assets/app.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
   <link rel="stylesheet" type="text/css" href="../assets/main.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">-->
 </head>
 <body>
   <div class="container">
@@ -40,32 +45,38 @@
     <div class="row">
       <div class="col-xs-12 sell-items col-md-12"></div>
     </div>
-    <div class="row"> 
-      <div class="col-xs-7 col-md-7 form-group">
+    <form data-toggle="validator" role="form">
+      <div class="form-group">
         <label>Select the time period</label>
-        <select class ="form-control" size="1" id="select" name="select">
-          <option value="get">Custom</option>
-          <option value="day">Day</option>
-          <option value="week">Last week</option>
-          <option value="month">Last month</option>
-        </select>
+            <select class ="form-control" size="1" id="select" name="select">
+              <option value="get">Custom</option>
+              <option value="day">Day</option>
+              <option value="week">Last week</option>
+              <option value="month">Last month</option>
+            </select>
       </div>
-    </div>
-    <div class="row form-group" id="from">
-      <label class="col-xs-1 col-md-1 col-form-label">From</label>
-      <div class="col-xs-6 col-md-6" >
-        <input type="date" class="form-control" name="dayFrom" id="dayFrom">
+
+      <div class="form-group has-feedback" id="from">
+        <label class="col-form-label">From</label>
+        <div class='input-group date' id='datetimepicker'>
+          <input type='text' class="form-control" placeholder="mm/dd/yyy" id="dayFrom"  required/>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
       </div>
-    </div>
-    <div class="row form-group" id="to">
-      <label class="col-xs-1 col-md-1 col-form-label">To</label>
-      <div class="col-xs-6 col-md-6" >
-        <input type="date" class="form-control" name="dayTo" id="dayTo">
+
+      <div class="form-group has-feedback" id="to">
+        <label class="col-form-label">To</label>
+        <div class='input-group date' id='datetimepicker1'>
+          <input type='text' class="form-control" placeholder="mm/dd/yyy" id="dayTo"  required/>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <button class="btn btn-default btn-lg" id="button">GET GRAPH</button>
-    </div>
+    </form>
+    <button class="btn btn-default btn-lg" id="button">GET GRAPH</button>
     <div class="row graph-container">
       <canvas id="chart"></canvas>
     </div>
