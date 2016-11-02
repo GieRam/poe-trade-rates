@@ -5,6 +5,7 @@ import com.poe.trade.rates.domain.repository.TradeInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 import static com.poe.trade.rates.domain.entity.TradeInfoTransformer.transform;
@@ -35,4 +36,7 @@ public class TradeInfoService {
         return transform(repository.getTradeInfoForMonth(context));
     }
 
+    public Date getEarliestTradeInfo() {
+        return repository.getMinCreatedAt();
+    }
 }

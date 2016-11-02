@@ -13,4 +13,8 @@ public class TradeInfoTransformer {
         return tradeInfoDtos;
     }
 
+    public static TradeInfoDto transform(TradeInfo tradeInfo) {
+        return new TradeInfoDto(tradeInfo.getTradeRatio(), tradeInfo.getCreatedAt());
+    }
+
 }

@@ -64,4 +64,9 @@ public class TradeInfoController {
         return tradeInfoService.getTradeInfosForMonth(context);
     }
 
+    @RequestMapping(value = "/earliest", method = RequestMethod.GET)
+    public Date getEarliestTradeInfo() {
+        return tradeInfoService.getEarliestTradeInfo();
+    }
+
 }
