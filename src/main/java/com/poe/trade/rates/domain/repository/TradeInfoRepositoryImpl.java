@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static org.hibernate.criterion.Projections.min;
 import static org.hibernate.criterion.Restrictions.between;
 import static org.hibernate.criterion.Restrictions.eq;
 
@@ -67,6 +69,14 @@ public class TradeInfoRepositoryImpl implements TradeInfoRepository {
         return getCriteria()
                 .add(between("createdAt", startDate, endDate))
                 .list();
+    }
+
+    @Override
+    public Date getMinCreatedAt() {
+        Timestamp timeStamp = (Timestamp) getCriteria()
+                                                .setProjection(min("createdAt"))
+                                                .uniqueResult();
+        return new Date(timeStamp.getTime());
     }
 
     private Criteria getCriteraBuyAndSell(TradeInfoContext context) {

@@ -18,4 +18,5 @@ public interface TradeInfoRepository {
 
     List<TradeInfo> getTradeInfoForDateRange(Date startDate, Date endDate);
 
+    Date getMinCreatedAt();
 }
