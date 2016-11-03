@@ -1,7 +1,5 @@
-require(["helper/graphForm" ], function(graphForm) {});
-
-var graph = (function() {
-    var myChart = null;
+define(["helper/graphForm" ], function(graphForm) {
+  var myChart = null;
     var requestType = graphForm.requestType();
     function drawGraph(dateLabels, tradeRatio) {
       var graphData = {  
@@ -30,10 +28,10 @@ var graph = (function() {
             display: true,
             ticks: {
               callback: function(dateLabels, index) {
-                if(requestType == "day") {
+                if(requestType === "day") {
                   return index % 2 === 0 ? dateLabels : '';
                 } else {
-                  return index % 6 === 0 ? dateLabels : '';
+                  return index % 7 === 0 ? dateLabels : '';
                 }
                 
               }
@@ -44,7 +42,7 @@ var graph = (function() {
       var ctx = $("#chart");
       myChart = new Chart(ctx, graphData);
     }
-    return {
-      draw: drawGraph
-    }
-  })();
+  return {
+    draw: drawGraph
+  }
+});

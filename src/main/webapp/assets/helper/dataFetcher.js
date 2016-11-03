@@ -1,7 +1,5 @@
-require(["helper/urlBuilder", "helper/graphForm", "helper/graph"], function(urlBuilder, graphForm, graph) {});
-
-var dataFetcher = (function() {
-    function fetch() {
+define(["helper/urlBuilder", "helper/graphForm", "helper/graph"], function(urlBuilder, graphForm, graph) {
+  function fetch() {
       var dateLabels = []; 
       var tradeRatio = [];
       var createdAt = [];
@@ -42,5 +40,5 @@ var dataFetcher = (function() {
     }
     return {
       fetchData : fetch
-    } 
-  })();
+    }
+});
