@@ -1,17 +1,11 @@
+require("bootstrap-datepicker-webpack");
+require("bootstrap-datepicker-webpack/dist/css/bootstrap-datepicker.standalone.css");
+
 function init() {
-   $.ajax({
-      url: "http://" + window.location.host + "/trade-info/earliest",
-      success: function(result) {
-        $(function () {
-          $('.datetimepicker')
-          .datetimepicker({
-            format: 'YYYY-MM-DD',
-            minDate: result,
-            maxDate: new Date
-          })
-        });
-      }
-    }); 
+  $(function () {
+    $('.datepicker').datepicker({
+    })
+  });
   $("select").change(function() {
     var showDateFrom = $("#from").show();
     var showDateTo = $("#to").show();

@@ -1,3 +1,6 @@
+require("bootstrap-webpack");
+require("../assets/main.css");
+
 $(document).ready(function() { 
   var renderItems = require("./helper/renderItems");
   var item = require("./helper/item");
