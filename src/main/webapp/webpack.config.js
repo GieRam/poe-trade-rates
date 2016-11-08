@@ -6,7 +6,7 @@ module.exports = {
 	output : {
 		path: __dirname + "/dist",
 		publicPath: "../dist/",
-		filename: "bundle.js"
+		filename: 'bundle.js'
 	},
 	module: {
 		loaders: [
@@ -19,10 +19,10 @@ module.exports = {
  		]
 	},
 	plugins: [
-        new webpack.ProvidePlugin({
-		    $: "jquery",
-		    jQuery: "jquery",
-		    "window.jQuery": "jquery"
-        })
-    ]
+    new webpack.ProvidePlugin({
+	    $: "jquery",
+	    jQuery: "jquery",
+	    "window.jQuery": "jquery"
+    })
+  ]
 }
