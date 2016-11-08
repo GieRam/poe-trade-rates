@@ -1,11 +1,8 @@
-require("bootstrap-datepicker-webpack");
+require("bootstrap-datepicker-webpack/js/bootstrap-datepicker");
 require("bootstrap-datepicker-webpack/dist/css/bootstrap-datepicker.standalone.css");
 
 function init() {
-  $(function () {
-    $('.datepicker').datepicker({
-    })
-  });
+  $('.datepicker').datepicker;
   $("select").change(function() {
     var showDateFrom = $("#from").show();
     var showDateTo = $("#to").show();
