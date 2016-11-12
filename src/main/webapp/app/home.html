@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title >Path of Exile trade rates graphed</title>
-  <script type="text/javascript" src="../dist/bundle.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../dist/bundle.js" charset="utf-8"></script>
 </head>
 <body>
   <div class="container">
     <div class="row"> 
       <div class="col-xs-12 col-md-12">
-        <h1 class="title-main">Path of Exile trade rates graphed</h1>
+        <h1>Path of Exile trade rates graphed</h1>
       </div> 
     </div>
     <div class="row">
@@ -17,12 +17,12 @@
       <h4>What do you want?</h4>
       </div> 
     </div>
-    <div class="row buy-items">
+    <div class="row l-items">
       <div class="col-xs-12 col-md-12" >
-          <div class="buy-item buy-item-active" id="4">
+          <div class="item item-buy item-is-active" id="4">
             <img class="item-icon" src="../assets/images/items/Chaos_Orb.png" alt="Chaos Orb" title="Chaos Orb">
           </div>
-          <div class="buy-item" id="6">
+          <div class="item item-buy" id="6">
             <img class="item-icon" src="../assets/images/items/Exalted_Orb.png" alt="Exalted Orb" title="Exalted Orb">
           </div>
       </div>
@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 sell-items col-md-12"></div>
+      <div class="l-items l-items-sell col-xs-12 col-md-12"></div>
     </div>
     <form role="form" id="dateForm">
       <div class="form-group">
@@ -45,34 +45,28 @@
               <option value="month">Last month</option>
             </select>
       </div>
-
       <div class="form-group" id="from">
         <label class="col-form-label">From</label>
-
         <div class='input-group date' data-provide="datepicker" data-date-end-date="0d" data-date-format="yyyy-mm-dd">
           <input type='text' class="form-control" id="dayFrom"/>
           <div class="input-group-addon">
             <span class="glyphicon glyphicon-th"></span>
           </div>
         </div>
-
       </div>
-
       <div class="form-group" id="to">
         <label class="col-form-label">To</label>
-
         <div class='input-group date' data-provide="datepicker"  data-date-end-date="0d" data-date-format="yyyy-mm-dd">
           <input type='text' class="form-control" id="dayTo"/>
           <div class="input-group-addon">
             <span class="glyphicon glyphicon-th"></span>
           </div>
         </div>
-
       </div>
     </form>
-    <button class="btn btn-default btn-lg" id="button">GET GRAPH</button>
+    <button class="btn btn-default btn-lg button">GET GRAPH</button>
     <div class="row graph-container">
-      <canvas id="chart"></canvas>
+      <canvas class="chart"></canvas>
     </div>
   </div>
 </body>

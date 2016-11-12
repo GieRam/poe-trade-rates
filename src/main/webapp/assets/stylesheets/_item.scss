@@ -1,0 +1,21 @@
+.item {
+  width: 45px;
+  height: 45px;
+  margin: 2px;
+  float: left;
+  background-color: $light-grey;
+  border-color: $dark-grey;
+  border-radius: 6px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.item-icon {
+  width: 40px;
+  height: 40px;
+  margin: 2px;
+}
+
+.item-is-active, .item:hover {
+  background-color: $dark-grey;
+}

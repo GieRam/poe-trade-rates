@@ -1,20 +1,20 @@
 function init() {
-  var buyItem = $(".buy-item");
-  var sellItem = $(".sell-item");
+  var buyItem = $(".item-buy");
+  var sellItem = $(".item-sell");
   buyItem.click(function(){
-    buyItem.removeClass("buy-item-active");
-    $(this).addClass("buy-item-active");
+    buyItem.removeClass("item-is-active");
+    $(this).addClass("item-is-active");
   })
   sellItem.click(function(){
-    sellItem.removeClass("sell-item-active");
-    $(this).addClass("sell-item-active");
+    sellItem.removeClass("item-is-active");
+    $(this).addClass("item-is-active");
   })
 }
 function getBuyId() {
-  return $(".buy-item-active").attr("id");
+  return $(".item-buy.item-is-active").attr("id");
 }
 function getSellId() {
-  return $(".sell-item-active").attr("id");
+  return $(".item-sell.item-is-active").attr("id");
 }
 module.exports = {
   buyId: getBuyId,

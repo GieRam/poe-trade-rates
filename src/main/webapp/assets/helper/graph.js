@@ -41,7 +41,7 @@ function drawGraph(dateLabels, tradeRatio) {
       }],
     }
   }
-  var ctx = $("#chart");
+  var ctx = $(".chart");
   myChart = new Chart(ctx, graphData);
 }
 

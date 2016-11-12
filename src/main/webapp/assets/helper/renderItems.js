@@ -4,10 +4,10 @@ function renderItems() {
   items.forEach(function(itemName) {
   var itemNameSrc = itemName.replace(/ /g,"_");
   itemId++;
-  var item = "<div id=\""+ itemId + "\" class=\"sell-item \"><img class=\"item-icon\" src=\"../assets/images/items/" + itemNameSrc + ".png\" alt=\"" + itemName + "\" title=\"" + itemName + "\"></div>";
-  $(item).appendTo(".sell-items");
+  var item = "<div id=\""+ itemId + "\" class=\"item item-sell \"><img class=\"item-icon\" src=\"../assets/images/items/" + itemNameSrc + ".png\" alt=\"" + itemName + "\" title=\"" + itemName + "\"></div>";
+  $(item).appendTo(".l-items-sell");
   });
-  $(".sell-items .sell-item:nth-child(1)").addClass('sell-item-active');
+  $(".item-sell:first-child").addClass('item-is-active');
 }
 
 module.exports = {

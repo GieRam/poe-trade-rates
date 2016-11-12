@@ -1,5 +1,5 @@
 require("bootstrap-webpack");
-require("../assets/main.css");
+require("../assets/stylesheets/main.scss");
 
 $(document).ready(function() { 
   var renderItems = require("./helper/renderItems");
@@ -11,7 +11,7 @@ $(document).ready(function() {
   item.init();
   graphForm.init();
   
-  $("#button").click(function() {  
+  $(".button").click(function() {  
     dataFetcher.fetchData(); 
   })
 });
