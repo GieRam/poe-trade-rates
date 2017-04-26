@@ -1,4 +1,4 @@
-package com.poe.trade.rates.api.tradeinfo.services;
+package com.poe.trade.rates.api.services;
 
 import com.poe.trade.rates.domain.entity.TradeInfoDto;
 import com.poe.trade.rates.domain.repository.TradeInfoRepository;
@@ -29,11 +29,11 @@ public class TradeInfoService {
     }
 
     public List<TradeInfoDto> getTradeInfosForDay(TradeInfoContext context) {
-        return transform(repository.getTradeInfoForDay(context));
+        return transform(repository.getTradeInfosForDay(context));
     }
 
     public List<TradeInfoDto> getTradeInfosForMonth(TradeInfoContext context) {
-        return transform(repository.getTradeInfoForMonth(context));
+        return transform(repository.getTradeInfosForMonth(context));
     }
 
     public Date getEarliestTradeInfo() {

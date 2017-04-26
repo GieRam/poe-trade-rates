@@ -1,6 +1,6 @@
 package com.poe.trade.rates.domain.repository;
 
-import com.poe.trade.rates.api.tradeinfo.services.TradeInfoContext;
+import com.poe.trade.rates.api.services.TradeInfoContext;
 import com.poe.trade.rates.domain.entity.TradeInfo;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,18 +31,18 @@ public class TradeInfoRepositoryImpl implements TradeInfoRepository {
 
     @Override
     public List<TradeInfo> getTradeInfos(TradeInfoContext context) {
-        return getCriteraBuyAndSell(context)
+        return getCriteriaBuyAndSell(context)
                 .add(between("createdAt", context.getStartDate(), context.getEndDate()))
                 .list();
     }
 
     @Override
-    public List<TradeInfo> getTradeInfoForDay(TradeInfoContext context) {
+    public List<TradeInfo> getTradeInfosForDay(TradeInfoContext context) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(context.getStartDate());
         calendar.add(Calendar.DAY_OF_MONTH, 1);
 
-        return getCriteraBuyAndSell(context)
+        return getCriteriaBuyAndSell(context)
                 .add(between("createdAt", context.getStartDate(), calendar.getTime()))
                 .list();
     }
@@ -50,16 +51,16 @@ public class TradeInfoRepositoryImpl implements TradeInfoRepository {
     public List<TradeInfo> getTradeInfosLastWeek(TradeInfoContext context) {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -7);
-        return getCriteraBuyAndSell(context)
+        return getCriteriaBuyAndSell(context)
                 .add(between("createdAt", calendar.getTime(), now()))
                 .list();
     }
 
     @Override
-    public List<TradeInfo> getTradeInfoForMonth(TradeInfoContext context) {
+    public List<TradeInfo> getTradeInfosForMonth(TradeInfoContext context) {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, -1);
-        return getCriteraBuyAndSell(context)
+        return getCriteriaBuyAndSell(context)
                 .add(between("createdAt", calendar.getTime(), now()))
                 .list();
     }
@@ -79,15 +80,29 @@ public class TradeInfoRepositoryImpl implements TradeInfoRepository {
         return new Date(timeStamp.getTime());
     }
 
-    private Criteria getCriteraBuyAndSell(TradeInfoContext context) {
+    @Override
+    @Transactional
+    public void persistTransactional(TradeInfo tradeInfo) {
+        session().persist(tradeInfo);
+    }
+
+    @Override
+    public void delete(TradeInfo tradeInfo) {
+        session().delete(tradeInfo);
+    }
+
+    private Criteria getCriteriaBuyAndSell(TradeInfoContext context) {
         return getCriteria()
                 .add(eq("buyItem", context.getBuyItem()))
                 .add(eq("sellItem", context.getSellItem()));
     }
 
     private Criteria getCriteria() {
-        Session session = (Session) entityManager.getDelegate();
-        return session.createCriteria(TradeInfo.class);
+        return session().createCriteria(TradeInfo.class);
+    }
+
+    private Session session() {
+        return (Session) entityManager.getDelegate();
     }
 
     private Date now() {

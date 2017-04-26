@@ -1,3 +1,2 @@
-Poe trade rates backend.
-
-/trade-info/get - main api method.
+Path of exile trading rates scraping application.
+Frontend displays graphs of trading rates over time.

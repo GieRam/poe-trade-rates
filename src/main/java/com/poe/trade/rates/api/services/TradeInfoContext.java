@@ -1,4 +1,4 @@
-package com.poe.trade.rates.api.tradeinfo.services;
+package com.poe.trade.rates.api.services;
 
 import com.poe.trade.rates.domain.entity.BuyItem;
 import com.poe.trade.rates.domain.entity.SellItem;
