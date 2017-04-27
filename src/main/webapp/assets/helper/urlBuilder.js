@@ -8,10 +8,10 @@ function buildUrl() {
   var dateFrom = graphForm.startDate();
   var dateEnd = graphForm.endDate();
   var dataUrl = "http://" + window.location.host + "/trade-info/" + requestType + "?buyItem=" + buyItem + "&sellItem=" + sellItem;    
-  if(requestType == "day") {
+  if(requestType === "list/last/day") {
     dataUrl += "&startDate=" + dateFrom; 
   }
-  if(requestType == "get") {
+  if(requestType === "list") {
     dataUrl += "&startDate=" + dateFrom + "&endDate=" + dateEnd;
   }  
   return dataUrl;

@@ -8,11 +8,11 @@ function init() {
     var showDateTo = $("#to").show();
     var requestType = getRequestType();
     switch (requestType) { 
-      case "day":
+      case "list/last/day":
         showDateTo.toggle();
         break;
-      case "week":
-      case "month":
+      case "list/last/week":
+      case "list/last/month":
         showDateTo.toggle();
         showDateFrom.toggle();
         break;

@@ -17,7 +17,7 @@ function fetch() {
         } 
         createdAt.map(function(val) {
           dateLabels.push(millisecsToDate(val));
-        })
+        });
         graph.draw(dateLabels,tradeRatio);   
       }
     }); 
@@ -29,7 +29,7 @@ function fetch() {
     var month = months[date.getMonth()];
     var day = date.getDate();
     var datapoint = month + "." + pad(day);
-    if (graphForm.requestType() == "day") {
+    if (graphForm.requestType() === "list/last/day") {
       var hour = date.getHours();
       var minutes = date.getMinutes();
       return datapoint += ", " + pad(hour) + ":" + pad(minutes); 
